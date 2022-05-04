@@ -38,3 +38,13 @@ docker-compose exec web aerich init-db
 '''
 docker-compose exec web python -m pytest
 '''
+
+# Apply the schema to the database in its final state rather than applying the migrations via Aerich
+'''
+docker-compose exec web python app/db.py
+'''
+
+# Apply schema migration using Aerich
+'''
+docker-compose exec web aerich upgrade
+'''
