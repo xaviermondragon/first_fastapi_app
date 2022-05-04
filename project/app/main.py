@@ -7,6 +7,7 @@ from app.config import get_settings, Settings
 
 app = FastAPI()
 
+# Set up Tortoise on startup and clean up on teardown:
 register_tortoise(
     app,
     db_url=os.environ.get("DATABASE_URL"),

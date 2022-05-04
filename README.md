@@ -33,3 +33,8 @@ docker-compose exec web aerich init -t app.db.TORTOISE_ORM
 '''
 docker-compose exec web aerich init-db
 '''
+
+# Run the tests
+'''
+docker-compose exec web python -m pytest
+'''
