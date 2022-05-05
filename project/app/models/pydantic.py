@@ -1,5 +1,9 @@
 from pydantic import BaseModel
 
 
-class SummaryPyLoadSchema(BaseModel):
+class SummaryPayLoadSchema(BaseModel):
     url: str
+
+
+class SummaryResponseSchema(SummaryPayLoadSchema):
+    id: int
