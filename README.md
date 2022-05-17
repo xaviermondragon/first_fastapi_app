@@ -85,3 +85,53 @@ docker-compose exec web python -m pytest
 
 ## list the 2 slowest tests
 `docker-compose exec web python -m pytest --durations=2`
+
+# Deployment
+## Create a new app
+```
+$ heroku create
+Creating app... done, ⬢ floating-mesa-11641
+https://floating-mesa-11641.herokuapp.com/ | https://git.heroku.com/floating-mesa-11641.git
+```
+
+## Log in to the Heroku Container Registry
+```
+$ heroku container:login
+```
+
+## Provision a new Postgres database with the hobby-dev plan:
+```
+$ heroku addons:create heroku-postgresql:hobby-dev --app floating-mesa-11641
+```
+
+## Build the production image and tag it
+```
+$ docker build -f project/Dockerfile.prod -t registry.heroku.com/floating-mesa-11641/web ./project
+```
+
+## To test locally, spin up the container
+```
+$ docker run --name fastapi-tdd -e PORT=8765 -e DATABASE_URL=sqlite://sqlite.db -p 5003:8765 registry.heroku.com/floating-mesa-11641/web:latest
+```
+
+## Bring down the container once done:
+```
+docker rm fastapi-tdd -f
+```
+
+## Push the image to the registry:
+```
+$ docker push registry.heroku.com/floating-mesa-11641/web:latest
+```
+
+## Release the image:
+```
+$ heroku container:release web --app floating-mesa-11641
+```
+
+## You should be able to view the app at http://floating-mesa-11641.herokuapp.com/ping
+
+## Apply the migrations:
+```
+$ heroku run aerich upgrade --app floating-mesa-11641
+```
