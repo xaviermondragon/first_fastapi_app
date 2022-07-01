@@ -12,7 +12,7 @@ TORTOISE_ORM = {
     "apps": {
         "models": {
             "models": ["app.models.tortoise", "aerich.models"],
-            "default_connection": "default"
+            "default_connection": "default",
         },
     },
 }
@@ -43,5 +43,3 @@ async def generate_schema() -> None:
 
 if __name__ == "__main__":
     run_async(generate_schema())
-
-

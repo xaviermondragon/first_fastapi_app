@@ -62,6 +62,17 @@ docker-compose exec web aerich upgrade
 docker-compose exec web python -m pytest
 `
 
+## Run the tests with coverage
+`
+docker-compose exec web python -m pytest --cov="." --cov-report html
+`
+#### The coverage report can be found in [/project/htmlcov/index.html](./project/htmlcov/index.html)
+
+## Get a coverage report
+`
+docker-compose exec web python -m pytest --cov="."
+`
+
 ## disable warnings
 `docker-compose exec web python -m pytest -p no:warnings`
 
@@ -85,6 +96,24 @@ docker-compose exec web python -m pytest
 
 ## list the 2 slowest tests
 `docker-compose exec web python -m pytest --durations=2`
+
+# Code Quality
+## Code linting with flake
+```
+docker-compose exec web black . --check
+docker-compose exec web black . --diff
+docker-compose exec web black .
+```
+
+## Sort all our imports alphabetically and automatically separate them into sections
+```
+docker-compose exec web isort . --check-only
+docker-compose exec web isort . --diff
+docker-compose exec web isort .
+```
+
+# Code Formatting
+
 
 # Deployment
 ## Create a new app
