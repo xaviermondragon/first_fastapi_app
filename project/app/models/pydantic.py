@@ -7,3 +7,7 @@ class SummaryPayLoadSchema(BaseModel):
 
 class SummaryResponseSchema(SummaryPayLoadSchema):
     id: int
+
+
+class SummaryUpdatePayloadSchema(SummaryPayLoadSchema):
+    summary: str

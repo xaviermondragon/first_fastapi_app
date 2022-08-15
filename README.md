@@ -1,3 +1,13 @@
+# Preparation
+Switch to project folder
+```
+sudo apt install python3.10-venv
+python3.10 -m venv env
+source env/bin/activate
+pip3.10 install -r requirements.txt
+deactivate
+```
+
 # Run the server
 `
 uvicorn app.main:app
@@ -7,6 +17,10 @@ uvicorn app.main:app
 uvicorn app.main:app --reload
 `
 
+# Create docker images and start the containers
+`
+docker-compose up -d --build
+`
 
 
 # Access the database via psql (psql is a terminal-based front-end to PostgreSQL)
